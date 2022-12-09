@@ -63,7 +63,7 @@ object Day9 extends App {
 
   def headPositionIterator: Iterator[Position] = motionIterator.scanLeft(Position.START)((pos, dir) => pos + dir)
 
-  def nextNot(previousNot: Iterator[Position], start: Position = Position.START): Iterator[Position] =
+  def nextKnot(previousNot: Iterator[Position], start: Position = Position.START): Iterator[Position] =
     previousNot.scanLeft(start)((tail, head) => {
       val delta = head - tail
       if (delta.squaredNorm > 2) tail + delta.sign else tail
