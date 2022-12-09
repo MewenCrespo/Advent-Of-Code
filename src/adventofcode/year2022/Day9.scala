@@ -71,10 +71,10 @@ object Day9 extends App {
 
   // Step 1
   def secondKnotPositionIterator: Iterator[Position] = nextKnot(previousNot = headPositionIterator)
-  println(f"The tail of the rope visit ${secondKnotPositionIterator.to(Set).size}%d position at least once")
+  println(f"The second knot of the rope visited exactly ${secondKnotPositionIterator.to(Set).size}%d position at least once")
 
   // Step 2
   val N = 10
   def lastKnotPositionIterator: Iterator[Position] = (3 to N).foldLeft(secondKnotPositionIterator)((prev, i) => nextKnot(previousNot = prev))
-  println(f"The tail of the rope visit ${lastKnotPositionIterator.to(Set).size}%d position at least once")
+  println(f"The tail (knot #$N%d) of the rope visited exactly ${lastKnotPositionIterator.to(Set).size}%d position at least once")
 }
