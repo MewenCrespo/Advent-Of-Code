@@ -37,7 +37,7 @@ object Day9 extends App {
     case Right extends Direction(1, 0)
   }
 
-  export Direction.* //Otherwise Left is scala.Left, same for Right
+  export Direction.* //Otherwise Left is scala.Left, and Right is scala.Right
 
   case class Position(x: Int, y: Int) {
     def +(delta: Vector): Position = Position(x + delta.dx, y + delta.dy)
@@ -64,6 +64,8 @@ object Day9 extends App {
   def headPositionIterator: Iterator[Position] = motionIterator.scanLeft(Position.START)((pos, dir) => pos + dir)
 
   def nextKnot(previousNot: Iterator[Position], start: Position = Position.START): Iterator[Position] =
+    //Technically the newt knot has an extra position (the initial one) compared to the previous one, which may not be the desired behaviour, but this
+    // is irrelevant for our problem
     previousNot.scanLeft(start)((tail, head) => {
       val delta = head - tail
       if (delta.squaredNorm > 2) tail + delta.sign else tail
